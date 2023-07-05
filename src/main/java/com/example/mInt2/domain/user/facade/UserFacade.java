@@ -1,5 +1,6 @@
 package com.example.mInt2.domain.user.facade;
 
+import com.example.mInt2.domain.auth.exception.AlreadyPhoneNumberExistException;
 import com.example.mInt2.domain.user.domain.User;
 import com.example.mInt2.domain.user.domain.repository.UserRepository;
 import com.example.mInt2.domain.user.exception.AlreadyEmailExistsException;
@@ -40,6 +41,12 @@ public class UserFacade {
     public void checkNicknameExists(String nickname) {
         if (userRepository.findByNickname(nickname).isPresent()) {
             throw AlreadyNicknameExistException.EXCEPTION;
+        }
+    }
+
+    public void checkUserPhoneNumber(String phoneNumber) {
+        if (userRepository.findByPhoneNumber(phoneNumber).isPresent()) {
+            throw AlreadyPhoneNumberExistException.EXCEPTION;
         }
     }
 

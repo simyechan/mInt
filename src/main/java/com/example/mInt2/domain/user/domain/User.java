@@ -1,5 +1,6 @@
 package com.example.mInt2.domain.user.domain;
 
+import com.example.mInt2.global.entity.BaseTimeEntity;
 import com.example.mInt2.global.enums.UserRole;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "tbl_user")
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +37,7 @@ public class User {
     @Column(unique = true)
     private String phoneNumber;
 
+
     @NotNull
     @Size(max = 30)
     private String nickname;
@@ -46,10 +48,11 @@ public class User {
     private UserRole role;
 
     @Builder
-    public User(String email, String password, String nickname, UserRole role) {
+    public User(String nickname, String phoneNumber, String email, String password, UserRole role) {
+        this.nickname = nickname;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
-        this.nickname = nickname;
         this.role = role;
     }
 

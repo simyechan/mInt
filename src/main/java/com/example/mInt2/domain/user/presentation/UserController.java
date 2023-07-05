@@ -1,7 +1,9 @@
 package com.example.mInt2.domain.user.presentation;
 
 import com.example.mInt2.domain.auth.presentation.dto.response.UserTokenResponse;
+import com.example.mInt2.domain.user.presentation.dto.request.UpdatePasswordRequest;
 import com.example.mInt2.domain.user.presentation.dto.request.UserSignUpRequest;
+import com.example.mInt2.domain.user.service.UpdatePasswordService;
 import com.example.mInt2.domain.user.service.UserLogoutService;
 import com.example.mInt2.domain.user.service.UserSignUpService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -20,6 +22,8 @@ import javax.validation.Valid;
 @RestController
 public class UserController {
     private final UserSignUpService userSignUpService;
+    private final UpdatePasswordService updatePasswordService;
+
     private final UserLogoutService userLogoutService;
 
     @ApiOperation(value = "회원가입")
@@ -27,6 +31,13 @@ public class UserController {
     @PostMapping
     public UserTokenResponse userSignUp(@RequestBody @Valid UserSignUpRequest request) {
         return userSignUpService.execute(request);
+    }
+
+    @ApiOperation(value = "비밀번호 변경")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/password")
+    public void updatePassword(@RequestBody @Valid UpdatePasswordRequest request) {
+        updatePasswordService.execute(request);
     }
 
     @ApiOperation(value = "로그아웃")

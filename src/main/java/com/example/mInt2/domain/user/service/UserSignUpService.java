@@ -30,9 +30,10 @@ public class UserSignUpService {
         userFacade.checkUserExists(request.getEmail());
 
         User user = userRepository.save(User.builder()
+                .nickname(request.getNickname())
+                .phoneNumber(request.getPhoneNumber())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .nickname(request.getNickname())
                 .role(UserRole.USER)
                 .build());
 

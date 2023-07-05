@@ -25,4 +25,11 @@ public class UserSignUpRequest {
     @NotBlank(message = "nickname은 Null, 공백, 띄어쓰기를 허용하지 않습니다.")
     @Length(min = 1, max = 20, message = "nickname은 20글자 이하여야 합니다.")
     private String nickname;
+
+    @ApiModelProperty(value = "phoneNumber", example = "01011112222")
+    @NotBlank(message = "phone_number는 Null, 공백, 띄어쓰기를 허용하지 않습니다.")
+    @Size(min = 1, max = 15, message = "ID는 15글자여야 합니다.")
+    private String phoneNumber;
+
 }
+
